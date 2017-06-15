@@ -6,6 +6,7 @@ import store, { history } from './store'
 import App from './containers/App'
 import registerServiceWorker from './registerServiceWorker';
 import './index.css'
+import 'bootstrap/dist/css/bootstrap.css';
 
 
 const target = document.getElementById('root');
