@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom'
-import Login from '../components/Login'
+import SignInPage from '../components/SignInPage'
 
 const App = () => (
   <div>
@@ -9,7 +9,7 @@ const App = () => (
     </header>
 
     <main>
-      <Route exact path="/" component={Login} />
+      <Route exact path="/" component={SignInPage} />
     </main>
   </div>
 )

@@ -10,7 +10,8 @@ const initialState = {}
 const enhancers = []
 const middleware = [
   thunk,
-  routerMiddleware(history)
+  routerMiddleware(history),
+  
 ]
 
 if (process.env.NODE_ENV === 'development') {
