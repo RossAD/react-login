@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
-
 import { Button, Form, FormGroup, Label, Input, Nav, NavItem, NavLink, TabContent, Row, Col, TabPane } from 'reactstrap';
+import axios from 'axios';
 
 const SIGN_IN = "1"
 const SIGN_UP = "2"
@@ -58,8 +58,30 @@ export default class Login extends React.Component {
   }
 
   onSubmit = (e) => {
-    console.log("Submitting!");
+    let email = this.state.email;
+    let password = this.state.password;
+
+    console.log("Submitting ", email, " ", password);
     e.preventDefault();
+    axios.post('http://localhost:3000/graphql', {
+      "query": `
+mutation {
+  authenticate(input: {
+    email: "${email}"
+    password: "${password}"
+  }) {
+    jwt 
+  }
+}
+      `
+    }).then( (response) => {
+      let jwt = response.data.data.authenticate.jwt;
+      if (jwt === null) {
+        alert("No user exists with those credentials");
+      } else {
+        alert("You're all signed in");
+      }
+    });
   }
 
   confirmPasswordFormGroupColor = () => {
@@ -70,7 +92,7 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <Nav tabs>
           <NavItem>
             <NavLink
